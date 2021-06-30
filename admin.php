@@ -2,7 +2,32 @@
 <html lang="en">
   <head>
     <!-- Required meta tags -->
-    <meta charset="utf-8" />
+    <meta charset="utf-8" /><?php
+ $server = "localhost";
+ $username = "root";
+ $password = "";
+
+ $con = mysqli_connect($server, $username, $password);
+
+ if(!$con)
+ {
+     die("connection to the database failed due to".mysqli_connect_error());
+ }
+
+ $name = $_GET['productName'];
+
+ $sql = "INSERT INTO `e-commerce`.`Products` (`SERIAL`, `NAME`, `TYPE`, `NUMBER`, `DATE`) VALUES (NULL, 'Product 6', 'Product type 6', '10', current_timestamp());";
+ 
+if($con->query($sql) == true)
+{
+    echo "successfully inserted";
+}
+else{
+    echo "Error while inserting <br> $sql <br> $con->error";
+}
+
+$con->close();
+ ?>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- Bootstrap CSS -->
@@ -98,6 +123,7 @@
           <th scope="col">#</th>
           <th scope="col">name</th>
           <th scope="col">type</th>
+          <th scope="col">Product ID</th>
           <th scope="col">date</th>
           <th scope="col">left</th>
           <th scope="col">update</th>
@@ -124,6 +150,8 @@
         </tr>
       </tbody>
     </table>
+
+
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
       <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Add item</button>
     </div>
@@ -137,10 +165,10 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form>
+          <form action="database.php" method="GET">
             <div class="input-group mb-3">
               <span class="input-group-text" id="inputGroup-sizing-default">product name</span>
-              <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+              <input type="text" name = "productName" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
             </div>
   
             <div class="input-group mb-3">
