@@ -4,8 +4,9 @@
 $server = "localhost";
  $username = "root";
  $password = "";
+ $database = "e-commerce";
 
- $con = mysqli_connect($server, $username, $password);
+ $con = mysqli_connect($server, $username, $password, $database);
 
  if(!$con)
  {
@@ -19,7 +20,7 @@ $server = "localhost";
  $photo = $_GET['photo'];
  $productID = rand();
 
- $sql = "INSERT INTO `e-commerce`.`Products`(`SERIAL`, `NAME`, `TYPE`, `PRICE`, `NUMBER`, `PHOTO`, `DATE`) VALUES (NULL,'$name','$type','$price','$number','$photo' current_timestamp())";
+ $sql = "INSERT INTO `Products`(`SERIAL`,`PRODUCT ID`, `NAME`, `TYPE`, `PRICE`, `NUMBER`, `PHOTO`, `DATE`) VALUES (NULL,'$productID','$name','$type','$price','$number','$photo', current_timestamp())";
  
 if($con->query($sql) == true)
 {
