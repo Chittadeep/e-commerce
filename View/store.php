@@ -46,16 +46,11 @@
             <?php
             while ($row = mysqli_fetch_assoc($result)) {
                 // echo var_dump($row);
-                echo "<tr><td>" . $row['SERIAL'] .  "</td><td>" . $row['NAME'] . "</td><td>" . $row['TYPE'] . "</td><td>" . $row['PRODCUT ID'] . "</td><td>" . $row['DATE'] . "</td><td>" . $row['NUMBER'] . "</td></tr>";
-                
+                echo "<tr><td>" . $row['SERIAL'] .  "</td><td>" . $row['NAME'] . "</td><td>" . $row['TYPE'] . "</td><td>" . $row['PRODUCT ID'] . "</td><td>" . $row['DATE'] . "</td><td>" . $row['NUMBER'] . "</td></tr>";
             }
             ?>
-
-
+        </tbody>
     </table>
-
-
-
 
 </body>
 
