@@ -1,14 +1,5 @@
 <?php
-$server = "localhost";
-$username = "root";
-$password = "";
-$database = "e-commerce";
-
-$con = mysqli_connect($server, $username, $password, $database);
-
-if (!$con) {
-  die("connection to the database failed due to" . mysqli_connect_error());
-}
+require_once "../Controllers/config.php";
 ?>
 
 
@@ -70,16 +61,7 @@ if (!$con) {
     <div class="tab-pane fade show active" id="pills-products" role="tabpanel" aria-labelledby="pills-home-tab">
       <table class="table">
         <?php
-        $server = "localhost";
-        $username = "root";
-        $password = "";
-        $database = "e-commerce";
-
-        $con = mysqli_connect($server, $username, $password, $database);
-
-        if (!$con) {
-          die("connection to the database failed due to" . mysqli_connect_error());
-        }
+        require_once "../Controllers/config.php";
 
         $sql = "SELECT * FROM `Products`";
         $result = mysqli_query($con, $sql);
@@ -184,6 +166,7 @@ if (!$con) {
 
         <tbody>
           <?php
+          
           $sql = "SELECT * FROM `Admins`";
           $result = mysqli_query($con, $sql);
 
