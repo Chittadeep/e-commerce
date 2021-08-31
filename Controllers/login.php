@@ -1,5 +1,7 @@
 <?php
 require_once "config.php";
+session_start();
+
 
 $mail = $_POST['e-mail'];
 $password = $_POST['password'];

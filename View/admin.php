@@ -2,6 +2,10 @@
 require_once "../Controllers/config.php";
 
 session_start();
+
+if(!isset($_SESSION["admin"]))
+die("login required");
+
 ?>
 
 
@@ -280,10 +284,9 @@ session_start();
 
     //session_start();
     echo "<h2>";
-    echo "cholche";
-    echo $_SESSION["admin"];
+    echo $_SESSION["admin"][1];
     echo "</h2>";
-
+    session_unset();
 ?>
 </body>
 
