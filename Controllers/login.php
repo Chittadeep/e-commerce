@@ -20,8 +20,15 @@ $row = mysqli_fetch_row($result);
 
 $count = mysqli_num_rows($result);
 
+
 if($count == 1){
+
+
+    $_SESSION["admin"]= $row;
     header("location: ../View/admin.php");
+
+    //echo $_SESSION["admin"][1];
+
 }
 else{
     echo "failed logging in";

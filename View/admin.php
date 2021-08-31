@@ -1,5 +1,7 @@
 <?php
 require_once "../Controllers/config.php";
+
+session_start();
 ?>
 
 
@@ -274,7 +276,15 @@ require_once "../Controllers/config.php";
       document.getElementById("productType").value = opt;
     }
   </script>
+<?php
 
+    //session_start();
+    echo "<h2>";
+    echo "cholche";
+    echo $_SESSION["admin"];
+    echo "</h2>";
+
+?>
 </body>
 
 </html>
