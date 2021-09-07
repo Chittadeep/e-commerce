@@ -3,8 +3,8 @@ require_once "../Controllers/config.php";
 
 session_start();
 
-if(!isset($_SESSION["admin"]))
-die("login required");
+//if (!isset($_SESSION["admin"]))
+  //die("login required");
 
 ?>
 
@@ -91,7 +91,7 @@ die("login required");
           <?php
           while ($row = mysqli_fetch_assoc($result)) {
 
-            echo "<tr><td>" . $row['SERIAL'] .  "</td><td>" . $row['NAME'] . "</td><td>" . $row['TYPE'] . "</td><td>" . $row['PRODUCT ID'] . "</td><td>" . $row['DATE'] . "</td><td>" . $row['NUMBER'] . "</td></tr>";
+            echo "<tr><td>" . $row['SERIAL'] .  "</td><td>" . $row['NAME'] . "</td><td>" . $row['TYPE'] . "</td><td>" . $row['PRODUCT ID'] . "</td><td>" . $row['DATE'] . "</td><td>" . $row['NUMBER'] . "</td><td>" . "<button type='button' class='btn btn-info'>Update</button>" . "</td><td>" . "<form action = '../Controllers/delProducts.php' method = 'GET'><button type='submit' class='btn btn-success' name='delete' value = '".$row['PRODUCT ID']."'>Delete</button></form>" . "</td></tr>";
           }
           ?>
         </tbody>
@@ -172,7 +172,7 @@ die("login required");
 
         <tbody>
           <?php
-          
+
           $sql = "SELECT * FROM `Admins`";
           $result = mysqli_query($con, $sql);
 
@@ -280,14 +280,14 @@ die("login required");
       document.getElementById("productType").value = opt;
     }
   </script>
-<?php
+  <?php
 
-    //session_start();
-    echo "<h2>";
-    echo $_SESSION["admin"][1];
-    echo "</h2>";
-    session_unset();
-?>
+  //session_start();
+  echo "<h2>";
+  echo $_SESSION["admin"][1];
+  echo "</h2>";
+  session_unset();
+  ?>
 </body>
 
 </html>
