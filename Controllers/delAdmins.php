@@ -1,9 +1,9 @@
 <?php
 require_once "config.php";
 
-$productID = $_GET["delete"];
+$adminID = $_GET["delete"];
 
-$sql = "DELETE FROM `Products` WHERE `PRODUCT ID` = $productID;";
+$sql = "DELETE FROM `Admins` WHERE `ID` = $adminID;";
 
 
 if($con->query($sql) == true)

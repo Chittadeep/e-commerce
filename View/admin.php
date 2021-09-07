@@ -167,6 +167,8 @@ session_start();
             <th scope="col">Email</th>
             <th scope="col">Handle</th>
             <th scope="col">Date</th>
+            <th scope="col">Update</th>
+            <th scope="col">Delete</th>
           </tr>
         </thead>
 
@@ -178,7 +180,7 @@ session_start();
 
           while ($row = mysqli_fetch_assoc($result)) {
             // echo var_dump($row);
-            echo "<tr><td>" . $row['SERIAL'] .  "</td><td>" . $row['NAME'] . "</td><td>" . $row['DATE'] . "</td><td>" . $row['PHONE'] . "</td><td>" . $row['EMAIL'] . "</td><td>" . $row['HANDLE'] . "</td><td>" . $row['DATE'] . "</td></tr>";
+            echo "<tr><td>" . $row['SERIAL'] .  "</td><td>" . $row['NAME'] . "</td><td>" . $row['ID'] . "</td><td>" . $row['PHONE'] . "</td><td>" . $row['EMAIL'] . "</td><td>" . $row['HANDLE'] . "</td><td>" . $row['DATE'] . "</td><td>" . "<button type='button' class='btn btn-info'>Update</button>" . "</td><td>" . "<form action = '../Controllers/delAdmins.php' method = 'GET'><button type='submit' class='btn btn-success' name='delete' value = '".$row['ID']."'>Delete</button></form>"."</td></tr>";
           }
           ?>
         </tbody>

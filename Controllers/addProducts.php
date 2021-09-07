@@ -13,7 +13,7 @@ require_once "config.php";
  
 if($con->query($sql) == true)
 {
-    echo "successfully inserted";
+    header("location: ../View/admin.php");
 }
 else{
     echo "Error while inserting <br> $sql <br> $con->error";
