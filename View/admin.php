@@ -3,8 +3,8 @@ require_once "../Controllers/config.php";
 
 session_start();
 
-//if (!isset($_SESSION["admin"]))
-  //die("login required");
+if (!isset($_SESSION["admin"]))
+  die("login required");
 
 ?>
 
@@ -79,6 +79,7 @@ session_start();
             <th scope="col">#</th>
             <th scope="col">name</th>
             <th scope="col">type</th>
+            <th scope="col">photo</th>
             <th scope="col">Product ID</th>
             <th scope="col">date</th>
             <th scope="col">left</th>
@@ -91,7 +92,7 @@ session_start();
           <?php
           while ($row = mysqli_fetch_assoc($result)) {
 
-            echo "<tr><td>" . $row['SERIAL'] .  "</td><td>" . $row['NAME'] . "</td><td>" . $row['TYPE'] . "</td><td>" . $row['PRODUCT ID'] . "</td><td>" . $row['DATE'] . "</td><td>" . $row['NUMBER'] . "</td><td>" . "<button type='button' class='btn btn-info'>Update</button>" . "</td><td>" . "<form action = '../Controllers/delProducts.php' method = 'GET'><button type='submit' class='btn btn-success' name='delete' value = '".$row['PRODUCT ID']."'>Delete</button></form>" . "</td></tr>";
+            echo "<tr><td>" . $row['SERIAL'] .  "</td><td>" . $row['NAME'] . "</td><td>" . $row['TYPE'] . "</td><td> <img src ='", $row['PHOTO'], "'></td><td>" . $row['PRODUCT ID'] . "</td><td>" . $row['DATE'] . "</td><td>" . $row['NUMBER'] . "</td><td>" . "<button type='button' class='btn btn-info'>Update</button>" . "</td><td>" . "<form action = '../Controllers/delProducts.php' method = 'GET'><button type='submit' class='btn btn-success' name='delete' value = '".$row['PRODUCT ID']."'>Delete</button></form>" . "</td></tr>";
           }
           ?>
         </tbody>

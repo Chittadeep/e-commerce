@@ -1,4 +1,5 @@
 <?php
+
 require_once "config.php";
 session_start();
 
@@ -24,7 +25,6 @@ $count = mysqli_num_rows($result);
 
 
 if($count == 1){
-
 
     $_SESSION["admin"]= $row;
     header("location: ../View/admin.php");
