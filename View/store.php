@@ -56,11 +56,15 @@ if (!isset($_SESSION["customer"]))
     echo "    <div class='card-body'>";
     echo "        <h5 class='card-title'>";
     echo            $row['NAME'];
+    //echo $_SESSION["customer"][1];
+    //echo $_SESSION["customer"][3];
     echo "        </h5>";
     echo "        <p class='card-text'>Some quick example text to build on the card title and make up the bulk of the card's content.</p>";
     echo "        <form action='../Controllers/addToCart.php' method='GET'>";
     echo "            <input type = 'text' value= " . $row["PRODUCT ID"] . " name='product_id' hidden = true>";
     echo "            <input type = 'number' name = 'quantity'>";
+    echo "<input type = 'text' name='customer_name' hidden = true value =".$_SESSION["customer"][1].">";
+    echo "<input type = 'text' name='customer_id' hidden = true value =".$_SESSION["customer"][3].">";
     echo "        <button type='submit' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#myModal'>Add to cart</button>";
     echo "        </form>";
     echo "    </div>";
@@ -96,8 +100,10 @@ if (!isset($_SESSION["customer"]))
   echo "<h2>";
   echo $_SESSION["customer"][1];
   echo "</h2>";
-  session_unset();
+  //session_unset();
  ?>
+
+ <a href="../Controllers/logout.php">Log out</a>
 </body>
 
 </html>
