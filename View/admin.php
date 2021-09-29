@@ -55,6 +55,17 @@ if (!isset($_SESSION["admin"]))
             </button>
           </li>
         </ul>
+
+        <div style="align-content: center;">
+          <?php
+          echo "<h3 style = 'color: white'> ";
+          echo $_SESSION["admin"][1];
+          echo "</h2>";
+          ?>
+
+          <a href="../Controllers/logout.php" style="color: white;">Log out</a>
+        </div>
+
       </div>
     </div>
   </nav>
@@ -81,6 +92,7 @@ if (!isset($_SESSION["admin"]))
             <th scope="col">type</th>
             <th scope="col">photo</th>
             <th scope="col">Product ID</th>
+            <th scope="col">Price</th>
             <th scope="col">Product Description</th>
             <th scope="col">date</th>
             <th scope="col">left</th>
@@ -93,7 +105,7 @@ if (!isset($_SESSION["admin"]))
           <?php
           while ($row = mysqli_fetch_assoc($result)) {
 
-            echo "<tr><td>" . $row['SERIAL'] .  "</td><td>" . $row['NAME'] . "</td><td>" . $row['TYPE'] . "</td><td> <img src ='", $row['PHOTO'], "'></td><td>" . $row['PRODUCT ID'] ."</td><td>".$row['PRODUCT DESCRIPTION']. "</td><td>" . $row['DATE'] . "</td><td>" . $row['NUMBER'] . "</td><td>" . "<button type='button' class='btn btn-info'>Update</button>" . "</td><td>" . "<form action = '../Controllers/delete.php' method = 'GET'><input type = 'text' value = 'products' name = 'type' hidden = true><button type='submit' class='btn btn-success' name='delete' value = '" . $row['PRODUCT ID'] . "'>Delete</button></form>" . "</td></tr>";
+            echo "<tr><td>" . $row['SERIAL'] .  "</td><td>" . $row['NAME'] . "</td><td>" . $row['TYPE'] . "</td><td> <img src ='", $row['PHOTO'], "'></td><td>" . $row['PRODUCT ID']. "</td><td>" . $row['PRICE'] . "</td><td>" . $row['PRODUCT DESCRIPTION'] . "</td><td>" . $row['DATE'] . "</td><td>" . $row['NUMBER'] . "</td><td>" . "<button type='button' id = 'update' onclick = updateProduct('" . $row["NAME"] . "','" . $row["TYPE"] . "','" . $row["PRODUCT ID"] . "','" . $row["PRODUCT DESCRIPTION"] . "','".$row["PRICE"] ."','" . $row["NUMBER"] . "') class='btn btn-info'>Update</button>" . "</td><td>" . "<form action = '../Controllers/delete.php' method = 'GET'><input type = 'text' value = 'products' name = 'type' hidden = true><button type='submit' class='btn btn-success' name='delete' value = '" . $row['PRODUCT ID'] . "'>Delete</button></form>" . "</td></tr>";
           }
           ?>
         </tbody>
@@ -149,6 +161,56 @@ if (!isset($_SESSION["admin"]))
                   <input name="photo" type="file" class="form-control" id="inputGroupFile01">
                 </div>
 
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" name="addItem">Save changes</button>
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="updateProduct" tabindex="-1" aria-labelledby="updateProductLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <form action="../Controllers/updateProduct.php" method="GET">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add product</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="inputGroup-sizing-default">product name</span>
+                  <input type="text" name="productName" id="productName" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                </div>
+
+                <div class="input-group mb-3">
+                  <button class="btn btn-outline-secondary dropdown-toggle" data-target="productType" type="button" data-bs-toggle="dropdown" aria-expanded="false">type</button>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#" onclick="drop('Clothes')">Clothes</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="drop('Accessiories')">Accessiories</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="drop('Something else here')">Something else here</a></li>
+                    <li>
+                      <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">Separated link</a></li>
+                  </ul>
+                  <input name="productType" id="productType" type="text" class="form-control" aria-label="Text input with dropdown button">
+                </div>
+
+                <div class="input-group mb-3">
+                  <input name="productPrice" id="productPrice" type="text" class="form-control" placeholder="Price" aria-label="price">
+                  <input name="productNumber" id="productNumber" type="number" class="form-control" placeholder="number" aria-label="Server">
+                </div>
+
+                <div class="form-floating">
+                  <textarea class="form-control" placeholder="Leave a comment here" id="productDescription" name="description" style="height: 100px"></textarea>
+                  <label for="floatingTextarea2">Product Description</label>
+                </div>
 
               </div>
               <div class="modal-footer">
@@ -281,22 +343,28 @@ if (!isset($_SESSION["admin"]))
   </div>
   </div>
 
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
   <script>
     function drop(opt) {
       document.getElementById("productType").value = opt;
     }
 
+    function updateProduct(name, type, id, description, price ,number) {
+      console.log(name, type, id, description, price, number);
+      productName.value = name;
+      productType.value = type;
+      productNumber.value = number;
+      productDescription.value = description;
+      productPrice.value= price;
+      $('#updateProduct').modal('toggle');
+    }
+
+    function updateAdmin
   </script>
-  <?php
 
-  //session_start();
-  echo "<h2>";
-  echo $_SESSION["admin"][1];
-  echo "</h2>";
-  //session_unset();
-  ?>
-
-<a href="../Controllers/logout.php">Log out</a>
 
 </body>
 
