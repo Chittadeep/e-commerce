@@ -81,6 +81,7 @@ if (!isset($_SESSION["admin"]))
             <th scope="col">type</th>
             <th scope="col">photo</th>
             <th scope="col">Product ID</th>
+            <th scope="col">Product Description</th>
             <th scope="col">date</th>
             <th scope="col">left</th>
             <th scope="col">update</th>
@@ -92,7 +93,7 @@ if (!isset($_SESSION["admin"]))
           <?php
           while ($row = mysqli_fetch_assoc($result)) {
 
-            echo "<tr><td>" . $row['SERIAL'] .  "</td><td>" . $row['NAME'] . "</td><td>" . $row['TYPE'] . "</td><td> <img src ='", $row['PHOTO'], "'></td><td>" . $row['PRODUCT ID'] . "</td><td>" . $row['DATE'] . "</td><td>" . $row['NUMBER'] . "</td><td>" . "<button type='button' class='btn btn-info'>Update</button>" . "</td><td>" . "<form action = '../Controllers/delProducts.php' method = 'GET'><button type='submit' class='btn btn-success' name='delete' value = '" . $row['PRODUCT ID'] . "'>Delete</button></form>" . "</td></tr>";
+            echo "<tr><td>" . $row['SERIAL'] .  "</td><td>" . $row['NAME'] . "</td><td>" . $row['TYPE'] . "</td><td> <img src ='", $row['PHOTO'], "'></td><td>" . $row['PRODUCT ID'] ."</td><td>".$row['PRODUCT DESCRIPTION']. "</td><td>" . $row['DATE'] . "</td><td>" . $row['NUMBER'] . "</td><td>" . "<button type='button' class='btn btn-info'>Update</button>" . "</td><td>" . "<form action = '../Controllers/delete.php' method = 'GET'><input type = 'text' value = 'products' name = 'type' hidden = true><button type='submit' class='btn btn-success' name='delete' value = '" . $row['PRODUCT ID'] . "'>Delete</button></form>" . "</td></tr>";
           }
           ?>
         </tbody>
@@ -138,6 +139,11 @@ if (!isset($_SESSION["admin"]))
                   <input name="productNumber" type="number" class="form-control" placeholder="number" aria-label="Server">
                 </div>
 
+                <div class="form-floating">
+                  <textarea class="form-control" placeholder="Leave a comment here" id="Product description" name="description" style="height: 100px"></textarea>
+                  <label for="floatingTextarea2">Product Description</label>
+                </div>
+
                 <div class="input-group mb-3">
                   <label class="input-group-text" for="inputGroupFile01">Upload</label>
                   <input name="photo" type="file" class="form-control" id="inputGroupFile01">
@@ -181,7 +187,7 @@ if (!isset($_SESSION["admin"]))
 
           while ($row = mysqli_fetch_assoc($result)) {
             // echo var_dump($row);
-            echo "<tr><td>" . $row['SERIAL'] .  "</td><td>" . $row['NAME'] . "</td><td>" . $row['ID'] . "</td><td>" . $row['PHONE'] . "</td><td>" . $row['EMAIL'] . "</td><td>" . $row['HANDLE'] . "</td><td>" . $row['DATE'] . "</td><td>" . "<button type='button' class='btn btn-info'>Update</button>" . "</td><td>" . "<form action = '../Controllers/delAdmins.php' method = 'GET'><button type='submit' class='btn btn-success' name='delete' value = '" . $row['ID'] . "'>Delete</button></form>" . "</td></tr>";
+            echo "<tr><td>" . $row['SERIAL'] .  "</td><td>" . $row['NAME'] . "</td><td>" . $row['ID'] . "</td><td>" . $row['PHONE'] . "</td><td>" . $row['EMAIL'] . "</td><td>" . $row['HANDLE'] . "</td><td>" . $row['DATE'] . "</td><td>" . "<button type='button' class='btn btn-info'>Update</button>" . "</td><td>" . "<form action = '../Controllers/delete.php' method = 'GET'><input type ='text' value = 'admins' name = 'type' hidden = true><button type='submit' class='btn btn-success' name='delete' value = '" . $row['ID'] . "'>Delete</button></form>" . "</td></tr>";
           }
           ?>
         </tbody>
@@ -241,46 +247,45 @@ if (!isset($_SESSION["admin"]))
         </div>
       </div>
     </div>
-  
-  
-  
 
-      <div class="tab-pane fade" id="pills-cart" role="tabpanel" aria-labelledby="pills-contact-tab">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Product ID</th>
-              <th scope="col">Customer Name</th>
-              <th scope="col">Customer id</th>
-              <th scope="col">Quantity</th>
-              <th scope="col">Cart id</th>
-              <th scope="col">Date Time</th>
-              <th scope="col">Edit</th>
-              <th scope="col">Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php
 
-            $sql = "SELECT * FROM `Cart`";
-            $result = mysqli_query($con, $sql);
+    <div class="tab-pane fade" id="pills-cart" role="tabpanel" aria-labelledby="pills-contact-tab">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Product ID</th>
+            <th scope="col">Customer Name</th>
+            <th scope="col">Customer id</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Cart id</th>
+            <th scope="col">Date Time</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
 
-            while ($row = mysqli_fetch_assoc($result)) {
-              // echo var_dump($row);
-              echo "<tr><td>" . $row['SERIAL'] .  "</td><td>" . $row['PRODUCT ID'] . "</td><td>" . $row['CUSTOMER NAME'] . "</td><td>" . $row['CUSTOMER ID'] . "</td><td>" . $row['QUANTITY'] . "</td><td>" . $row['CART ID'] . "</td><td>" . $row['DATE'] . "</td><td>" . "<button type='button' class='btn btn-info'>Update</button>" . "</td><td>" . "<form action = '../Controllers/delAdmins.php' method = 'GET'><button type='submit' class='btn btn-success' name='delete' value = '" . $row['ID'] . "'>Delete</button></form>" . "</td></tr>";
-            }
-            ?>
-          </tbody>
-        </table>
-      </div>
+          $sql = "SELECT * FROM `Cart`";
+          $result = mysqli_query($con, $sql);
+
+          while ($row = mysqli_fetch_assoc($result)) {
+            // echo var_dump($row);
+            echo "<tr><td>" . $row['SERIAL'] .  "</td><td>" . $row['PRODUCT ID'] . "</td><td>" . $row['CUSTOMER NAME'] . "</td><td>" . $row['CUSTOMER ID'] . "</td><td>" . $row['QUANTITY'] . "</td><td>" . $row['CART ID'] . "</td><td>" . $row['DATE'] . "</td><td>" . "<button type='button' class='btn btn-info'>Update</button>" . "</td><td>" . "<form action = '../Controllers/delete.php' method = 'GET'><input type = 'text' value = 'cart' name = 'type' hidden = true><button type='submit' class='btn btn-success' name='delete' value = '" . $row['CART ID'] . "'>Dispatch</button></form>" . "</td></tr>";
+          }
+          ?>
+        </tbody>
+      </table>
     </div>
+  </div>
   </div>
 
   <script>
     function drop(opt) {
       document.getElementById("productType").value = opt;
     }
+
   </script>
   <?php
 
@@ -288,8 +293,11 @@ if (!isset($_SESSION["admin"]))
   echo "<h2>";
   echo $_SESSION["admin"][1];
   echo "</h2>";
-  session_unset();
+  //session_unset();
   ?>
+
+<a href="../Controllers/logout.php">Log out</a>
+
 </body>
 
 </html>

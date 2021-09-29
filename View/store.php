@@ -59,7 +59,7 @@ if (!isset($_SESSION["customer"]))
     //echo $_SESSION["customer"][1];
     //echo $_SESSION["customer"][3];
     echo "        </h5>";
-    echo "        <p class='card-text'>Some quick example text to build on the card title and make up the bulk of the card's content.</p>";
+    echo "        <p class='card-text'>".$row['PRODUCT DESCRIPTION']."</p>";
     echo "        <form action='../Controllers/addToCart.php' method='GET'>";
     echo "            <input type = 'text' value= " . $row["PRODUCT ID"] . " name='product_id' hidden = true>";
     echo "            <input type = 'number' name = 'quantity'>";
