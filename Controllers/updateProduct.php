@@ -9,14 +9,6 @@ $productPrice = $_GET['productPrice'];
 $productNumber = $_GET['productNumber'];
 $productDescription = $_GET['description'];
 
-echo $productID;
-echo $productName;
-echo $productID;
-echo $productType;
-echo $productPrice;
-echo $productNumber;
-echo $productDescription;
-
 $sql = "UPDATE `Products` SET `NAME` = '$productName', `TYPE`= '$productType', `PRICE`='$productPrice', `PRODUCT DESCRIPTION`='$productDescription', `NUMBER`= '$productNumber' WHERE `PRODUCT ID` = '$productID'";
 
 

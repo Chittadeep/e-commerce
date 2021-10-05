@@ -313,10 +313,10 @@ if (!isset($_SESSION["admin"]))
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Add admin</h5>
+                <h5 class="modal-title" id="staticBackdropLabel">Update admin</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
-              <form action="../Controllers/updateAdmins.php" method="POST">
+              <form action="../Controllers/updateAdmin.php" method="POST">
                 <div class="modal-body">
 
                   <div class="input-group">
