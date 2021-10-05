@@ -105,7 +105,7 @@ if (!isset($_SESSION["admin"]))
           <?php
           while ($row = mysqli_fetch_assoc($result)) {
 
-            echo "<tr><td>" . $row['SERIAL'] .  "</td><td>" . $row['NAME'] . "</td><td>" . $row['TYPE'] . "</td><td> <img src ='", $row['PHOTO'], "'></td><td>" . $row['PRODUCT ID']. "</td><td>" . $row['PRICE'] . "</td><td>" . $row['PRODUCT DESCRIPTION'] . "</td><td>" . $row['DATE'] . "</td><td>" . $row['NUMBER'] . "</td><td>" . "<button type='button' id = 'update' onclick = updateProduct('" . $row["NAME"] . "','" . $row["TYPE"] . "','" . $row["PRODUCT ID"] . "','" . $row["PRODUCT DESCRIPTION"] . "','".$row["PRICE"] ."','" . $row["NUMBER"] . "') class='btn btn-info'>Update</button>" . "</td><td>" . "<form action = '../Controllers/delete.php' method = 'GET'><input type = 'text' value = 'products' name = 'type' hidden = true><button type='submit' class='btn btn-success' name='delete' value = '" . $row['PRODUCT ID'] . "'>Delete</button></form>" . "</td></tr>";
+            echo "<tr><td>" . $row['SERIAL'] .  "</td><td>" . $row['NAME'] . "</td><td>" . $row['TYPE'] . "</td><td> <img src ='", $row['PHOTO'], "'></td><td>" . $row['PRODUCT ID'] . "</td><td>" . $row['PRICE'] . "</td><td>" . $row['PRODUCT DESCRIPTION'] . "</td><td>" . $row['DATE'] . "</td><td>" . $row['NUMBER'] . "</td><td>" . "<button type='button' id = 'update' onclick = updateProduct('" . $row["NAME"] . "','" . $row["TYPE"] . "','" . $row["PRODUCT ID"] . "','" . $row["PRODUCT DESCRIPTION"] . "','" . $row["PRICE"] . "','" . $row["NUMBER"] . "') class='btn btn-info'>Update</button>" . "</td><td>" . "<form action = '../Controllers/delete.php' method = 'GET'><input type = 'text' value = 'products' name = 'type' hidden = true><button type='submit' class='btn btn-success' name='delete' value = '" . $row['PRODUCT ID'] . "'>Delete</button></form>" . "</td></tr>";
           }
           ?>
         </tbody>
@@ -187,7 +187,7 @@ if (!isset($_SESSION["admin"]))
                   <span class="input-group-text" id="inputGroup-sizing-default">product name</span>
                   <input type="text" name="productName" id="productName" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                 </div>
-
+                <input type="number" id=productID name="productID" hidden = true>
                 <div class="input-group mb-3">
                   <button class="btn btn-outline-secondary dropdown-toggle" data-target="productType" type="button" data-bs-toggle="dropdown" aria-expanded="false">type</button>
                   <ul class="dropdown-menu">
@@ -249,13 +249,14 @@ if (!isset($_SESSION["admin"]))
 
           while ($row = mysqli_fetch_assoc($result)) {
             // echo var_dump($row);
-            echo "<tr><td>" . $row['SERIAL'] .  "</td><td>" . $row['NAME'] . "</td><td>" . $row['ID'] . "</td><td>" . $row['PHONE'] . "</td><td>" . $row['EMAIL'] . "</td><td>" . $row['HANDLE'] . "</td><td>" . $row['DATE'] . "</td><td>" . "<button type='button' class='btn btn-info'>Update</button>" . "</td><td>" . "<form action = '../Controllers/delete.php' method = 'GET'><input type ='text' value = 'admins' name = 'type' hidden = true><button type='submit' class='btn btn-success' name='delete' value = '" . $row['ID'] . "'>Delete</button></form>" . "</td></tr>";
+            echo "<tr><td>" . $row['SERIAL'] .  "</td><td>" . $row['NAME'] . "</td><td>" . $row['ID'] . "</td><td>" . $row['PHONE'] . "</td><td>" . $row['EMAIL'] . "</td><td>" . $row['HANDLE'] . "</td><td>" . $row['DATE'] . "</td><td>" . "<button type='button'id = 'update' onclick = updateAdmin('" . $row["NAME"] . "','" . $row["ID"] . "','" . $row["PHONE"] . "','" . $row["EMAIL"] . "','" . $row["HANDLE"] . "') class='btn btn-info'>Update</button>" . "</td><td>" . "<form action = '../Controllers/delete.php' method = 'GET'><input type ='text' value = 'admins' name = 'type' hidden = true><button type='submit' class='btn btn-success' name='delete' value = '" . $row['ID'] . "'>Delete</button></form>" . "</td></tr>";
           }
           ?>
         </tbody>
       </table>
       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
         <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#addAdmin">Add admin</button>
+
 
         <div class="modal fade" id="addAdmin" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
           <div class="modal-dialog">
@@ -307,6 +308,57 @@ if (!isset($_SESSION["admin"]))
             </div>
           </div>
         </div>
+
+        <div class="modal fade" id="updateAdmin" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Add admin</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <form action="../Controllers/updateAdmins.php" method="POST">
+                <div class="modal-body">
+
+                  <div class="input-group">
+                    <span class="input-group-text">First and last name</span>
+                    <input type="text" aria-label="First name" class="form-control" id="adminName" name="firstName">
+                    <input type="text" aria-label="Last name" class="form-control" name="lastName">
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="adminEmail" aria-describedby="emailHelp" name="email">
+                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                  </div>
+                  <input type="number" id=adminID name="adminID" hidden = true>
+                  <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password">
+                  </div>
+
+
+                  <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon3">phone</span>
+                    <input type="phone" class="form-control" id="adminPhone" aria-describedby="basic-addon3" name="phone">
+                  </div>
+
+                  <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Handle</span>
+                    <input type="text" class="form-control" placeholder="Username" id="adminHandle" aria-label="Username" aria-describedby="basic-addon1" name="handle">
+                  </div>
+                </div>
+                <div class="input-group mb-3">
+                  <input type="file" class="form-control" id="photo" name="photo">
+                  <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                </div>
+
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -352,17 +404,26 @@ if (!isset($_SESSION["admin"]))
       document.getElementById("productType").value = opt;
     }
 
-    function updateProduct(name, type, id, description, price ,number) {
+    function updateProduct(name, type, id, description, price, number) {
       console.log(name, type, id, description, price, number);
       productName.value = name;
       productType.value = type;
       productNumber.value = number;
       productDescription.value = description;
-      productPrice.value= price;
+      productPrice.value = price;
+      productID.value = id;
       $('#updateProduct').modal('toggle');
     }
 
-    function updateAdmin
+    function updateAdmin(name, id, phone, email, handle) {
+      console.log(name, id, phone, email, handle);
+      adminName.value = name;
+      adminEmail.value = email;
+      adminPhone.value = phone;
+      adminHandle.value = handle;
+      adminID.value=id;
+      $('#updateAdmin').modal('toggle');
+    }
   </script>
 
 
